@@ -16,6 +16,7 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+import matplotlib.patheffects as path_effects
 import cartopy.feature as cfeature
 from cartopy import crs as ccrs
 from cartopy.feature import NaturalEarthFeature
@@ -1267,6 +1268,7 @@ if st.sidebar.button("Hitung"):
     else:
         st.markdown("<h1 style='text-align: center;'>KELUK KEBOLEHNAMPAKAN MODEL KATSNER</h1>", unsafe_allow_html=True)
         st.pyplot(plot_katsner)
+
 
 
 
