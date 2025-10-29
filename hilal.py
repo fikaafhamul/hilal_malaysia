@@ -1099,7 +1099,7 @@ def plot_hilal_map(data_peta, bulan_hijriah_str, tahun_hijriah, data_type="altit
 
     fig = plt.figure(figsize=(10, 6))
     ax = plt.axes(projection=ccrs.PlateCarree())
-    ax.set_extent([94, 142, -12, 7], crs=ccrs.PlateCarree())
+    ax.set_extent([100, 120, 1, 7], crs=ccrs.PlateCarree())
 
     # Add coastlines and borders with specified colors
     ax.coastlines('10m')
@@ -1250,6 +1250,7 @@ if st.sidebar.button("Hitung"):
     else:
         st.markdown("<h1 style='text-align: center;'>KELUK KEBOLEHNAMPAKAN MODEL KATSNER</h1>", unsafe_allow_html=True)
         st.pyplot(plot_katsner)
+
 
 
 
