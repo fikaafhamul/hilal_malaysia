@@ -1208,9 +1208,9 @@ if st.sidebar.button("Hitung"):
 
     st.code(f"""
         --------------------------------------------------------------------------------
-                                     DATA FALAK HILAL
+                                        DATA FALAK HILAL
                                AWAL BULAN {(hijriah().bulan_hijriah(bulan_input)).upper()} {tahun_input} H
-                 JET PROPULSION LABORATORY (JPL) NASA, BY INSTITUT LATIHAN ISLAM MALAYSIA (ILIM)
+        JET PROPULSION LABORATORY (JPL) NASA, BY INSTITUT LATIHAN ISLAM MALAYSIA (ILIM)
         --------------------------------------------------------------------------------
 
         Pengiraan dilakukan untuk waktu matahari terbenam pada {data['sunset'].strftime('%H:%M:%S')}, tarikh {data['sunset'].day} {data['n_bln']} {data['sunset'].year} M
@@ -1250,6 +1250,7 @@ if st.sidebar.button("Hitung"):
     else:
         st.markdown("<h1 style='text-align: center;'>KELUK KEBOLEHNAMPAKAN MODEL KATSNER</h1>", unsafe_allow_html=True)
         st.pyplot(plot_katsner)
+
 
 
 
