@@ -1057,8 +1057,8 @@ def datapeta(AwalBulan):
 
                 # elongasi geosentris
                 elongation = astrometric_geocentric.separation_from(astrometric_sun_geocentric).degrees
-                topo_moon = observer.at(sunset_time_utc).observe(moon).apparent()
-                topo_sun = observer.at(sunset_time_utc).observe(sun).apparent()
+                topo_moon = observer_at.at(sunset_time_utc).observe(moon).apparent()
+                topo_sun = observer_at.at(sunset_time_utc).observe(sun).apparent()
                 el_topo = topo_sun.separation_from(topo_moon).degrees
 
                 # Simpan hasil
@@ -1250,5 +1250,6 @@ if st.sidebar.button("Hitung"):
     else:
         st.markdown("<h1 style='text-align: center;'>KELUK KEBOLEHNAMPAKAN MODEL KATSNER</h1>", unsafe_allow_html=True)
         st.pyplot(plot_katsner)
+
 
 
