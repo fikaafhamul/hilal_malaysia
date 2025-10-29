@@ -1100,20 +1100,26 @@ def plot_hilal_map(data_peta, bulan_hijriah_str, tahun_hijriah, data_type="altit
     fig = plt.figure(figsize=(10, 6))
     ax = plt.axes(projection=ccrs.PlateCarree())
     ax.set_extent([99, 121, 0, 8], crs=ccrs.PlateCarree())
+    ax.set_facecolor("white")  # Laut tetap putih
 
     # Add coastlines and borders with specified colors
-    ax.coastlines('10m')
+    land = cfeature.NaturalEarthFeature(
+        'physical', 'land', '50m',
+        edgecolor='none', facecolor='#BFD8A6'
+    )
+    ax.add_feature(land, zorder=0)
+    ax.coastlines(color='#444444', linewidth=0.5, zorder=2)
+    ax.add_feature(
+        cfeature.BORDERS.with_scale('50m'),
+        linewidth=0.3, edgecolor='#444444', zorder=2
+    )
 
-    ax.set_facecolor('white')
-    ax.add_feature(cfeature.LAND, color='#BFD8A6')
-    ax.add_feature(cfeature.OCEAN, color='white')
-    ax.add_feature(cfeature.COASTLINE, edgecolor='#5A4D3D')
-    ax.add_feature(cfeature.BORDERS, linestyle=':', edgecolor='#5A4D3D')
-    ax.add_feature(cfeature.LAKES, color='#A2C4E6', alpha=0.6)
-    ax.add_feature(cfeature.RIVERS, color='#76A5AF', alpha=0.7)
 
     # Tambahkan garis lintang dan bujur (gridlines) with specified styles
-    gl = ax.gridlines(draw_labels=True, linestyle="--", linewidth=0.5, color="gray", alpha=0.7)
+    gl = ax.gridlines(
+        draw_labels=True, linewidth=0.2,
+        color='gray', alpha=0.5, linestyle='--'
+    )
     gl.top_labels = False
     gl.right_labels = False
     gl.xformatter = LONGITUDE_FORMATTER
@@ -1131,11 +1137,22 @@ def plot_hilal_map(data_peta, bulan_hijriah_str, tahun_hijriah, data_type="altit
 
     # Add a white background to the labels for better visibility
     for label in contour_labels:
-        label.set_backgroundcolor('white')
+        label.set_color(label.get_color())  # tetap merah / hitam sesuai contour
+        label.set_fontweight('bold')
+        label.set_path_effects([
+            path_effects.Stroke(linewidth=2, foreground="white"),  # outline putih
+            path_effects.Normal()
+        ])
 
-
-    ax.text(0.01, 0.03, "created by Institut Latihan Islam Malaysia (ILIM)", horizontalalignment='left', fontname="sans-serif",
-                            verticalalignment='center', transform = ax.transAxes, fontsize=10, color='black')
+    ax.text(
+        0.01, 0.03,
+        "created by Institut Latihan Islam Malaysia (ILIM)",
+        ha='left', va='center',
+        transform=ax.transAxes,
+        fontsize=8, color='black',
+        fontname="DejaVu Sans",
+        bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=1)
+    )
 
     # Use dynamic title based on the data_type
     plt.title(f'PETA {title_type} WAKTU MATAHARI TERBENAM \n PENENTUAN AWAL BULAN {(hijriah().bulan_hijriah(bulan_hijriah_str)).upper()} {tahun_hijriah} H \n {jd_caldat_result.upper()} \n')
@@ -1250,6 +1267,7 @@ if st.sidebar.button("Hitung"):
     else:
         st.markdown("<h1 style='text-align: center;'>KELUK KEBOLEHNAMPAKAN MODEL KATSNER</h1>", unsafe_allow_html=True)
         st.pyplot(plot_katsner)
+
 
 
 
