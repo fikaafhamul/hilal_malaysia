@@ -1004,8 +1004,8 @@ def datapeta(AwalBulan):
     sunset = AwalBulan["sunset"]
 
     # Definisikan rentang lintang dan bujur untuk peta
-    latitudes = np.linspace(1, 7, 10)  # Indonesia's latitude range
-    longitudes = np.linspace(100, 120, 10)  # Indonesia's longitude range
+    latitudes = np.linspace(0, 8, 10)  # Indonesia's latitude range
+    longitudes = np.linspace(99, 121, 10)  # Indonesia's longitude range
 
     # Inisialisasi array untuk menyimpan hasil
     altitudes = np.zeros((len(latitudes), len(longitudes)))
@@ -1099,7 +1099,7 @@ def plot_hilal_map(data_peta, bulan_hijriah_str, tahun_hijriah, data_type="altit
 
     fig = plt.figure(figsize=(10, 6))
     ax = plt.axes(projection=ccrs.PlateCarree())
-    ax.set_extent([100, 120, 1, 7], crs=ccrs.PlateCarree())
+    ax.set_extent([99, 121, 0, 8], crs=ccrs.PlateCarree())
 
     # Add coastlines and borders with specified colors
     ax.coastlines('10m')
@@ -1250,6 +1250,7 @@ if st.sidebar.button("Hitung"):
     else:
         st.markdown("<h1 style='text-align: center;'>KELUK KEBOLEHNAMPAKAN MODEL KATSNER</h1>", unsafe_allow_html=True)
         st.pyplot(plot_katsner)
+
 
 
 
